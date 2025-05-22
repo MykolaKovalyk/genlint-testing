@@ -1,0 +1,53 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "Existing Dockerfile",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": ".",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "./Dockerfile"
+	},
+	"runArgs": [
+		"--network=host",
+		"--cap-add=SYS_PTRACE",
+        "--device-cgroup-rule", "c 189:* rmw",
+        "--device-cgroup-rule", "c 188:* rmw",
+		"-v",
+		"/dev/:/dev/"
+	],
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/home/me/.ssh,type=bind,consistency=cached"
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cmake-tools",
+				"ms-vscode.cpptools",
+				"eamodio.gitlens",
+				"llvm-vs-code-extensions.vscode-clangd",
+				"nordic-semiconductor.nrf-kconfig",
+				"nordic-semiconductor.nrf-devicetree",
+				"trond-snekvik.gnu-mapfiles"
+			],
+			"settings": {
+                // Preferred shell
+                "terminal.integrated.defaultProfile.linux": "bash",
+                // Preferred settings
+                "editor.renderWhitespace": "all",
+                "editor.tabSize": 4,
+                "editor.rulers": [80, 100, 120]
+            }
+		}
+		
+	}
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "cat /etc/os-release",
+	// Configure tool-specific properties.
+	// "customizations": {},
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+}

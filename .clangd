@@ -1,0 +1,6 @@
+CompileFlags:
+  CompilationDatabase: build
+  Remove: 
+    - -march=*
+    - -mabi=*
+    - -mcpu=*

@@ -1,0 +1,15 @@
+{
+    "cmake.sourceDirectory": "/workspaces/BachelorThesis/runner",
+    "cmake.environment": {
+        "BOARD": "native_sim/native/64",
+        "ZEPHYR_BASE": "/opt/zephyrproject/zephyr",
+        "PYTHONPATH": "/opt/zephyrproject/.venv/lib/python3.x/site-packages",
+        "PATH": "/opt/zephyrproject/.venv/bin:${env:PATH}"
+    },
+    "cmake.configureEnvironment": {
+        "BOARD": "native_sim/native/64",
+        "ZEPHYR_BASE": "/opt/zephyrproject/zephyr",
+        "PYTHONPATH": "/opt/zephyrproject/.venv/lib/python3.x/site-packages", 
+        "PATH": "/opt/zephyrproject/.venv/bin:${env:PATH}"
+    }
+}

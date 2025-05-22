@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "/opt/zephyrproject"
+		}
+	],
+	"settings": {
+		// clangd
+		"C_Cpp.intelliSenseEngine": "disabled",
+		"clangd.path": "/usr/bin/clangd-19",
+		"clangd.arguments": [
+			"--background-index",
+			"--clang-tidy",
+			"--enable-config",
+		],
+	}
+}
