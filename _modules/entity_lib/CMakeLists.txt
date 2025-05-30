@@ -12,5 +12,8 @@ if (CONFIG_FTEST_ENTITY)
     target_compile_options(native_simulator INTERFACE "-fPIC")
     target_link_options(native_simulator INTERFACE "-shared -Wl,-z,nodynamic-undefined-weak")
   endif()
+
+  # Exclude main (scheduler), as it will be provided by runner
+  target_compile_options(native_simulator INTERFACE "-DNSI_NO_MAIN=1")
 endif()
 
