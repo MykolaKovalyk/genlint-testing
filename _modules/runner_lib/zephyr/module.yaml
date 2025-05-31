@@ -1,0 +1,4 @@
+name: runner_lib
+build:
+  cmake: .
+  kconfig: Kconfig

@@ -1,0 +1,10 @@
+
+
+config FTEST
+    bool "FTEST"
+    default y
+    select ZTEST
+    help
+      Enable the FTEST framework. This framework is used to test scenarios where
+      several entities are involved, like network communication or complex
+      interactions.
