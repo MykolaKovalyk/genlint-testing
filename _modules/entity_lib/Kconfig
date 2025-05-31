@@ -1,0 +1,18 @@
+
+
+config FTEST_ENTITY
+    bool "FTEST_ENTITY"
+    default n
+    help
+      Designates this entity as an FTEST entity. This means that it will be 
+      built as a dynamic library, and will be compiled with special drivers 
+      for that framework.
+
+
+if FTEST_ENTITY
+
+
+# entity config here
+
+
+endif # FTEST_ENTITY
