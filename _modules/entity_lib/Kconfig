@@ -12,7 +12,5 @@ config FTEST_ENTITY
 if FTEST_ENTITY
 
 
-# entity config here
-
 
 endif # FTEST_ENTITY

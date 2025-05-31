@@ -9,6 +9,7 @@ if (CONFIG_FTEST)
 
   target_compile_options(native_simulator INTERFACE 
     -I${CMAKE_CURRENT_SOURCE_DIR}/include
+    -I${CMAKE_CURRENT_SOURCE_DIR}/../common/include
     -DCONFIG_FTEST_SHED_MAX_ENTITIES=${CONFIG_FTEST_SHED_MAX_ENTITIES}
   )
 
@@ -17,7 +18,9 @@ if (CONFIG_FTEST)
 
   target_sources(native_simulator INTERFACE 
     src/ftest_dl.c
+    src/ringbuffer.c
     src/ftest_sched.c
+    src/ftest_eth_buf.c
   )
 
   zephyr_library_sources(

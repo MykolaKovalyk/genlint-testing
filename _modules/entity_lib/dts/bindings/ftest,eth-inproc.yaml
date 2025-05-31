@@ -1,0 +1,18 @@
+
+description: The driver for communication between entities in ftest framework
+
+compatible: "ftest,eth-inproc"
+
+properties:
+  mac:
+    type: uint8-array
+    description: The mac address of the entity
+    required: true
+  ip:
+    type: string
+    description: The ip address of the entity
+    required: true
+  mask:
+    type: string
+    description: The network mask of the entity
+    required: true

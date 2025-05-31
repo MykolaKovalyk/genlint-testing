@@ -15,5 +15,7 @@ if (CONFIG_FTEST_ENTITY)
 
   # Exclude main (scheduler), as it will be provided by runner
   target_compile_options(native_simulator INTERFACE "-DNSI_NO_MAIN=1")
+
+  zephyr_library_sources_ifdef(CONFIG_NETWORKING drivers/ftest_eth_inproc.c)
 endif()
 
