@@ -11,6 +11,10 @@ if (CONFIG_FTEST)
     -I${CMAKE_CURRENT_SOURCE_DIR}/include
     -DCONFIG_FTEST_SHED_MAX_ENTITIES=${CONFIG_FTEST_SHED_MAX_ENTITIES}
   )
+
+  target_link_options(native_simulator INTERFACE "-Wl,--export-dynamic")
+  zephyr_ld_options(-Wl,--export-dynamic)
+
   target_sources(native_simulator INTERFACE src/ftest_sched.c)
 endif()
 
