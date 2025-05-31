@@ -9,3 +9,19 @@ config FTEST
       Enable the FTEST framework. This framework is used to test scenarios where
       several entities are involved, like network communication or complex
       interactions.
+
+
+if FTEST
+
+
+config FTEST_SHED_MAX_ENTITIES
+    int "FTEST_SHED_MAX_ENTITIES"
+    default 100
+    help
+      The maximum number of entities that can be handled by the FTEST sheduler.
+      This value should be set based on the expected number of entities in your tests.
+      Increasing this value allows for more entities to be managed simultaneously,
+      but may require more memory.
+
+
+endif # FTEST
