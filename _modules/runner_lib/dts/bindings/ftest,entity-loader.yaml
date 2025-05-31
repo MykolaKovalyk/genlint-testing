@@ -1,0 +1,10 @@
+
+description: The driver for loading entities in the FTest framework.
+
+compatible: "ftest,entity-loader"
+
+properties:
+  entity-path:
+    type: string
+    description: The path to the entity file to be loaded.
+    required: true

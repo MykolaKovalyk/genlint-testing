@@ -24,4 +24,14 @@ config FTEST_SHED_MAX_ENTITIES
       but may require more memory.
 
 
+config FTEST_ENTITY_LOADER_INIT_PRIORITY
+    int "FTEST_ENTITY_LOADER_INIT_PRIORITY"
+    default 100
+    help
+      The priority of the FTEST entity loader initialization.
+      This value determines the order in which the entity loader is initialized
+      relative to other components in the system. A lower number means higher priority.
+      Adjust this value based on your system's requirements.
+
+
 endif # FTEST

@@ -15,6 +15,13 @@ if (CONFIG_FTEST)
   target_link_options(native_simulator INTERFACE "-Wl,--export-dynamic")
   zephyr_ld_options(-Wl,--export-dynamic)
 
-  target_sources(native_simulator INTERFACE src/ftest_sched.c)
+  target_sources(native_simulator INTERFACE 
+    src/ftest_dl.c
+    src/ftest_sched.c
+  )
+
+  zephyr_library_sources(
+    drivers/ftest_entity_loader.c
+  )
 endif()
 
