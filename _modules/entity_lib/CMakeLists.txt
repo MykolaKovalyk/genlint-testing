@@ -16,6 +16,19 @@ if (CONFIG_FTEST_ENTITY)
   # Exclude main (scheduler), as it will be provided by runner
   target_compile_options(native_simulator INTERFACE "-DNSI_NO_MAIN=1")
 
+  target_compile_options(native_simulator INTERFACE 
+    -I${CMAKE_CURRENT_SOURCE_DIR}/include
+    -I${CMAKE_CURRENT_SOURCE_DIR}/../common/include
+  )
+
+  target_sources(native_simulator INTERFACE 
+    src/ftest_entity_api.c
+  )
+
+  zephyr_library_sources(
+    src/ftest_entity_api_impl.c
+  )
+
   zephyr_library_sources_ifdef(CONFIG_NETWORKING drivers/ftest_eth_inproc.c)
 
   if(CONFIG_FTEST_ETH_OUTPUT_PCAP)

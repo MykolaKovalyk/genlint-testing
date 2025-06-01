@@ -1,19 +1,19 @@
 #pragma once
 #include "zephyr/device.h"
+#include "zephyr/drivers/gpio.h"
+#include <stdbool.h>
 
 /******************************************************************************
- Structures
+ API structure
  ******************************************************************************/
 
-struct ftest_entity_loader_config {
-  const char *entity_path;
+struct ftest_entity_api {
+  bool initialized;
+  const struct device *(*device_get_binding)(const char *name);
 };
 
 /******************************************************************************
  API
  ******************************************************************************/
 
-void *ftest_entity_loader_get_sym(const struct device *dev,
-                                  const char *sym_name);
-
-struct ftest_entity_api *ftest_entity_loader_get_api(const struct device *dev);
+const struct ftest_entity_api *ftest_entity_api_get(void);

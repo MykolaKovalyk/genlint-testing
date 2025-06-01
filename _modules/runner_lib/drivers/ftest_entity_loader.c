@@ -1,6 +1,8 @@
 #include "ftest_entity_loader.h"
 #include "ftest_dl.h"
+#include "ftest_entity_api.h"
 #include "ftest_sched.h"
+#include "zephyr/kernel.h"
 #include "zephyr/logging/log.h"
 #include <errno.h>
 #include <stdio.h>
@@ -23,6 +25,7 @@ LOG_MODULE_REGISTER(entity_loader);
 
 struct ftest_entity_loader_data {
   void *entity_handle;
+  struct ftest_entity_api *api;
   struct ftest_shed_entity_config entity_config;
 };
 
@@ -100,6 +103,37 @@ static int entity_loader_init(const struct device *dev) {
     return status;
   }
 
+  struct ftest_entity_api *(*get_api_func)(void) =
+      api->get_sym(dev, "ftest_entity_api_get");
+
+  if (!get_api_func) {
+    LOG_ERR("Failed to find 'ftest_entity_api_get' in entity library");
+    ftest_dl_close_lib(data->entity_handle);
+    return -ENOENT;
+  }
+
+  unsigned retry_count = 10;
+  while (get_api_func() == NULL) {
+    if (--retry_count == 0) {
+      LOG_ERR("Entity API not initialized after retries");
+      ftest_dl_close_lib(data->entity_handle);
+      return -EAGAIN;
+    }
+
+    LOG_DBG("Waiting for entity API to be initialized...");
+    k_msleep(100);
+  }
+
+  data->api = get_api_func();
+
+  if (!data->api || !data->api->initialized) {
+    LOG_ERR("Unexpected entity API state: %p", data->api);
+    ftest_dl_close_lib(data->entity_handle);
+    return -ENOSYS;
+  }
+
+  LOG_INF("Entity library loaded successfully: %s", config->entity_path);
+
   return 0;
 }
 
@@ -130,6 +164,17 @@ void *ftest_entity_loader_get_sym(const struct device *dev,
   }
 
   return api->get_sym(dev, sym_name);
+}
+
+struct ftest_entity_api *ftest_entity_loader_get_api(const struct device *dev) {
+  struct ftest_entity_loader_data *data = dev->data;
+
+  if (!data || !data->api) {
+    LOG_ERR("Entity loader API not initialized");
+    return NULL;
+  }
+
+  return data->api;
 }
 
 /******************************************************************************

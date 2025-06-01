@@ -9,7 +9,6 @@ if (CONFIG_FTEST)
 
   target_compile_options(native_simulator INTERFACE 
     -I${CMAKE_CURRENT_SOURCE_DIR}/include
-    -I${CMAKE_CURRENT_SOURCE_DIR}/../common/include
     -DCONFIG_FTEST_SHED_MAX_ENTITIES=${CONFIG_FTEST_SHED_MAX_ENTITIES}
   )
 
@@ -25,6 +24,7 @@ if (CONFIG_FTEST)
 
   zephyr_library_sources(
     drivers/ftest_entity_loader.c
+    drivers/ftest_gpio_iface.c
   )
 endif()
 
