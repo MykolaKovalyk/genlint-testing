@@ -34,4 +34,15 @@ config FTEST_ENTITY_LOADER_INIT_PRIORITY
       Adjust this value based on your system's requirements.
 
 
+config FTEST_IFACE_INIT_PRIORITY
+    int "FTEST_IFACE_INIT_PRIORITY"
+    default 110
+    help
+      The priority of the FTEST interfaces initialization.
+      This value determines the order in which the drivers that expose
+      interfaces to other entities are initialized. It shall neccessarily be
+      greater than the FTEST_ENTITY_LOADER_INIT_PRIORITY - interface drivers
+      can be initialized only after the libraries themselves are loaded.
+
+
 endif # FTEST

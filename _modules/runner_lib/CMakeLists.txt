@@ -24,7 +24,7 @@ if (CONFIG_FTEST)
 
   zephyr_library_sources(
     drivers/ftest_entity_loader.c
-    drivers/ftest_gpio_iface.c
+    drivers/ftest_dev_iface.c
   )
 endif()
 
