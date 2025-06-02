@@ -12,5 +12,12 @@ config FTEST_ENTITY
 if FTEST_ENTITY
 
 
+config FTEST_ETH_OUTPUT_PCAP
+    bool "FTEST_ETH_OUTPUT_PCAP"
+    default n
+    depends on NETWORKING
+    help
+      Enable PCAP output for Ethernet driver in the FTEST framework.
+
 
 endif # FTEST_ENTITY

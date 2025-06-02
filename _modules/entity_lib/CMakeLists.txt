@@ -17,5 +17,9 @@ if (CONFIG_FTEST_ENTITY)
   target_compile_options(native_simulator INTERFACE "-DNSI_NO_MAIN=1")
 
   zephyr_library_sources_ifdef(CONFIG_NETWORKING drivers/ftest_eth_inproc.c)
+
+  if(CONFIG_FTEST_ETH_OUTPUT_PCAP)
+    target_sources(native_simulator INTERFACE src/ftest_pcap.c)
+  endif()
 endif()
 

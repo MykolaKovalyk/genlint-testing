@@ -1,5 +1,6 @@
 #include "ftest_eth_buf.h"
 #include "ringbuffer.h"
+#include "ftest_pcap.h"
 #include "zephyr/kernel.h"
 #include "zephyr/kernel/thread.h"
 #include "zephyr/logging/log_core.h"
@@ -131,6 +132,11 @@ static void ftest_eth_rx_task(void *iface_ptr, void *unused1, void *unused2) {
 
         LOG_INF("Received pkt %p len %d on iface %p", pkt, ftest_hdr->len,
                 iface);
+
+#if CONFIG_FTEST_ETH_OUTPUT_PCAP
+        ftest_pcap_write_packet(ftest_hdr->payload, ftest_hdr->len,
+                                k_uptime_get());
+#endif
       }
       k_yield();
     }
@@ -237,12 +243,16 @@ static int ftest_eth_iface_send(const struct device *dev, struct net_pkt *pkt) {
     return ret;
   }
 
-  LOG_INF("Send pkt %p len %d", pkt, count);
-
   ret = rb_write(&ftest_eth_inproc_rb, data->send_buf, TOTAL_PLD_LEN);
   if (ret < 0) {
     LOG_ERR("Cannot send pkt %p (%d)", pkt, ret);
   }
+
+  LOG_INF("Sent pkt %p len %d", pkt, count);
+
+#if CONFIG_FTEST_ETH_OUTPUT_PCAP
+  ftest_pcap_write_packet(ftest_hdr->payload, ftest_hdr->len, k_uptime_get());
+#endif
 
   return ret < 0 ? ret : 0;
 }
