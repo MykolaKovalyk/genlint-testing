@@ -21,6 +21,13 @@ if (CONFIG_FTEST_ENTITY)
     -I${CMAKE_CURRENT_SOURCE_DIR}/../common/include
   )
 
+  get_target_property(current_sources soc__native__inf_clock SOURCES)
+  list(REMOVE_ITEM current_sources soc.c)
+  set_target_properties(soc__native__inf_clock PROPERTIES SOURCES "${current_sources}")
+  target_sources(soc__native__inf_clock PRIVATE 
+    src/ftest_soc.c
+  )
+
   target_sources(native_simulator INTERFACE 
     src/ftest_entity_api.c
   )
