@@ -8,6 +8,10 @@
 #include "zephyr/drivers/serial/uart_emul.h"
 #endif
 
+#if CONFIG_ADC_EMUL
+#include "zephyr/drivers/adc/adc_emul.h"
+#endif
+
 static struct ftest_entity_api ftest_entity_api_impl = {
     .initialized = true,
     .device_get_binding = device_get_binding,
@@ -29,6 +33,14 @@ static struct ftest_entity_api ftest_entity_api_impl = {
     .uart_emul_set_errors = uart_emul_set_errors,
     .uart_emul_set_release_buffer_on_timeout =
         uart_emul_set_release_buffer_on_timeout,
+#endif
+
+#if CONFIG_ADC_EMUL
+    .adc_emul_const_value_set = adc_emul_const_value_set,
+    .adc_emul_const_raw_value_set = adc_emul_const_raw_value_set,
+    .adc_emul_value_func_set = adc_emul_value_func_set,
+    .adc_emul_raw_value_func_set = adc_emul_raw_value_func_set,
+    .adc_emul_ref_voltage_set = adc_emul_ref_voltage_set,
 #endif
 };
 

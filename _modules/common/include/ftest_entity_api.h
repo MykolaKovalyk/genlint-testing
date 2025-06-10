@@ -1,5 +1,6 @@
 #pragma once
 #include "zephyr/device.h"
+#include "zephyr/drivers/adc/adc_emul.h"
 #include "zephyr/drivers/gpio.h"
 #include "zephyr/drivers/serial/uart_emul.h"
 #include <stdbool.h>
@@ -38,6 +39,19 @@ struct ftest_entity_api {
   void (*uart_emul_set_errors)(const struct device *dev, int errors);
   void (*uart_emul_set_release_buffer_on_timeout)(const struct device *dev,
                                                   bool release_on_timeout);
+
+  /** ADC */
+  int (*adc_emul_const_value_set)(const struct device *dev, unsigned int chan,
+                                  uint32_t value);
+  int (*adc_emul_const_raw_value_set)(const struct device *dev,
+                                      unsigned int chan, uint32_t raw_value);
+  int (*adc_emul_value_func_set)(const struct device *dev, unsigned int chan,
+                                 adc_emul_value_func func, void *data);
+  int (*adc_emul_raw_value_func_set)(const struct device *dev,
+                                     unsigned int chan,
+                                     adc_emul_value_func func, void *data);
+  int (*adc_emul_ref_voltage_set)(const struct device *dev,
+                                  enum adc_reference ref, uint16_t value);
 };
 
 /******************************************************************************
