@@ -55,5 +55,6 @@ add_dependencies(app ftest_master ftest_buzzer ftest_button ftest_potentiometer)
 
 
 target_include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_sources(app PRIVATE test/main.c)
+
+target_sources(app PRIVATE test/scenario2.c)
 

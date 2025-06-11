@@ -1,0 +1,47 @@
+
+/ {
+    master: master {
+        compatible = "ftest,entity-loader";
+        entity-path = "./build/ftest_master/zephyr/zephyr.exe";
+
+        master_uart: uart_iface {
+            compatible = "ftest,dev-iface";
+            remote-label = "ftest_uart_emul";
+        };
+    };
+    buzzer: buzz {
+        compatible = "ftest,entity-loader";
+        entity-path = "./build/ftest_buzzer/zephyr/zephyr.exe";
+
+        buzz_gpio: gpio_iface {
+            compatible = "ftest,dev-iface";
+            remote-label = "ftest_gpio_emul";
+        };
+
+        buzz_uart: uart_iface {
+            compatible = "ftest,dev-iface";
+            remote-label = "ftest_uart_emul";
+        };
+    };
+    potentiometer: pot {
+        compatible = "ftest,entity-loader";
+        entity-path = "./build/ftest_potentiometer/zephyr/zephyr.exe";
+    };
+    button: btn {
+        compatible = "ftest,entity-loader";
+        entity-path = "./build/ftest_button/zephyr/zephyr.exe";
+
+        button_gpio: gpio_iface {
+            compatible = "ftest,dev-iface";
+            remote-label = "ftest_gpio_emul";
+        };
+    };
+
+    ftest_eth: ftest_eth {
+        compatible = "ftest,eth-inproc";
+        status = "okay";
+        mac = [ 00 11 22 33 44 55  ];
+        ip = "192.169.0.1";
+        mask = "255.255.255.0";
+    };
+};

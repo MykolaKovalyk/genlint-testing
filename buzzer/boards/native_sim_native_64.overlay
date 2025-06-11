@@ -1,0 +1,37 @@
+
+/ {
+    aliases {
+        command-bus = &uart1;
+        buzzer-pin = &buzzer_pin;
+    };
+
+    ftest_eth: ftest-eth {
+        status = "okay";
+        compatible = "ftest,eth-inproc";
+        mac = [ 00 11 22 33 44 58  ];
+        ip = "192.169.0.3";
+        mask = "255.255.255.0";
+    };
+
+    pin_map: pin-map {
+        status = "okay";
+        compatible = "gpio-leds";
+        buzzer_pin: buzzer-pin {
+            gpios = <&gpio0 27 GPIO_ACTIVE_HIGH>;
+        };
+    };
+};
+
+&gpio0 {
+    status = "okay";
+    label = "ftest_gpio_emul";
+};
+
+&uart1 {
+    status = "okay";
+    compatible = "zephyr,uart-emul";
+    label = "ftest_uart_emul";
+    current-speed = <0>;
+    rx-fifo-size = <256>;
+    tx-fifo-size = <256>;
+};

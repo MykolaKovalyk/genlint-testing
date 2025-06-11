@@ -1,0 +1,46 @@
+
+/ {
+    aliases {
+        command-bus =  &uart1;
+        blue-led = &blue_led;
+        red-led = &red_led;
+        yellow-led = &yellow_led;
+    };
+
+    ftest_eth: ftest_eth {
+        status = "okay";
+        compatible = "ftest,eth-inproc";
+        status = "okay";
+        mac = [ 00 11 22 33 44 57  ];
+        ip = "192.169.0.2";
+        mask = "255.255.255.0";
+    };
+
+    led_map: led-map {
+        status = "okay";
+        compatible = "gpio-leds";
+        blue_led: blue-led {
+            gpios = <&gpio0 1 GPIO_ACTIVE_HIGH>;
+        };
+        red_led: red-led {
+            gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>;
+        };
+        yellow_led: yellow-led {
+            gpios = <&gpio0 3 GPIO_ACTIVE_HIGH>;
+        };
+    };
+};
+
+&gpio0 {
+    status = "okay";
+    label = "ftest_gpio_emul";
+};
+
+&uart1 {
+    status = "okay";
+    compatible = "zephyr,uart-emul";
+    label = "ftest_uart_emul";
+    current-speed = <0>;
+    rx-fifo-size = <256>;
+    tx-fifo-size = <256>;
+};

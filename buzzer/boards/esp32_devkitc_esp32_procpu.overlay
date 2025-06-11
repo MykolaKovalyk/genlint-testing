@@ -1,0 +1,19 @@
+/ {
+    aliases {
+        command-bus =  &uart2;
+        buzzer-pin = &buzzer_pin;
+    };
+
+    pin_map: pin-map {
+        compatible = "gpio-leds";
+        buzzer_pin: buzzer-pin {
+            gpios = <&gpio0 27 GPIO_ACTIVE_HIGH>;
+        };
+    };
+};
+
+&uart2 {
+    status = "okay";
+};
+
+

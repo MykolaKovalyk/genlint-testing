@@ -7,4 +7,10 @@ list(APPEND ZEPHYR_EXTRA_MODULES ${CMAKE_CURRENT_SOURCE_DIR}/../_modules/entity_
 find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(master)
 
-target_sources(app PRIVATE src/main.c)
+
+target_include_directories(app PRIVATE include)
+
+target_sources(app PRIVATE 
+    src/main.c
+    src/network_events.c
+)
