@@ -103,5 +103,6 @@ RUN : \
 # For a working menuconfig
 ENV LC_ALL=C
 
-# Set ZEPHYR_BASE environment variables
+# Set environment variables
+ENV ZEPHYR_WORKSPACE=$ZEPHYR_WORKSPACE
 ENV ZEPHYR_BASE=$ZEPHYR_WORKSPACE/zephyr
