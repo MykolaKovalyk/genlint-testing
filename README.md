@@ -18,7 +18,7 @@ container using
 Then inside, go to `runner` directory and run:
 
 ```bash
-west build -p -b native_sim/native/64 
+west build -p -b nrf5340/cpuapp/ns 
 ```
 
 To run the test afterwards, run 
