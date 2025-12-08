@@ -3,6 +3,8 @@
 FTest is a framework for Zephyr's Native Simulator that can host multiple
 devices communicating over a network. It features the following capabilities:
 
+Add a new comment here!
+
 - Full reproducibility
 - Faster than realtime execution - 90 times the normal speed
 - Communication over an emulated Ethernet network
